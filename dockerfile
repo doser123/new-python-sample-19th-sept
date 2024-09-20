@@ -10,6 +10,6 @@ RUN npm start
 
 COPY . .
 
-EXPOSE 4000
+EXPOSE 3000
 
 CMD ["node", "index.js"]
