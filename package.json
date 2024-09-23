@@ -16,8 +16,8 @@
 }
 {
   "scripts": {
-    "test": "jest", // or your preferred testing framework
-    "regression-tests": "mocha tests/regression/**/*.js" // example command for regression tests
+    "test": "jest",
+    "regression-tests": "mocha tests/regression/**/*.js"
   }
 }
 
