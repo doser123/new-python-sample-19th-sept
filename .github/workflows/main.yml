@@ -12,17 +12,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    services:
-      app:
-        image: basic-server-image24:latest
-        ports:
-          - 3000:3000
-        options: >-
-          --health-cmd="curl --fail http://localhost:3000/health || exit 1"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -36,10 +25,18 @@ jobs:
     - name: Run Unit Tests
       run: docker run --rm basic-server-image24:latest npm test
 
+    - name: Start App Service
+      run: |
+        docker run -d --name basic-server -p 3000:3000 basic-server-image24:latest
+        # Give some time for the service to start
+        sleep 5
+
     - name: Run Sanity Tests
       run: |
-        # Replace with your actual sanity test command
-        docker run --rm basic-server-image24:latest curl -f http://localhost:3000/health
+        curl --fail http://localhost:3000/health
 
     - name: Run Regression Tests
       run: docker run --rm basic-server-image24:latest npm run regression-tests
+
+    - name: Stop App Service
+      run: docker stop basic-server
