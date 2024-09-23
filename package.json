@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "regression-tests": "mocha tests/regression/**/*.js"
   },
   "keywords": [],
   "author": "",
@@ -14,10 +15,3 @@
     "express": "^4.21.0"
   }
 }
-{
-  "scripts": {
-    "test": "jest",
-    "regression-tests": "mocha tests/regression/**/*.js"
-  }
-}
-
